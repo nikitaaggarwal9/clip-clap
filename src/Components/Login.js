@@ -103,7 +103,7 @@ export default function Signup() {
                     </CardContent>
                     <CardActions>
                         <Button color="primary" fullWidth={true} variant='contained' onClick={handleClick} disabled={loading}>
-                            Sign In
+                            Log In
                         </Button>
                     </CardActions>
                     <Card variant='outlined' className={classes.card2}>

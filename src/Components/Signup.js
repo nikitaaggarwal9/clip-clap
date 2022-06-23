@@ -3,7 +3,6 @@ import { useState, useContext } from 'react';
 import { AuthContext } from '../Context/AuthContext';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -12,7 +11,7 @@ import Alert from '@mui/material/Alert';
 import insta_logo from '../Assets/insta-logo.png'
 import TextField from '@mui/material/TextField';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { database, storage } from '../firebase';
 // import { updateDoc, serverTimestamp } from "firebase/firestore";
 
@@ -47,11 +46,13 @@ export default function Signup() {
             }, 2000)
             return;
         }
-
+        
         try {
             setError('')
             setLoading(true)
+            console.log(email, password)
             let userObj = await signup(email, password);
+            console.log(userObj)
             let uid = userObj.user.uid
             console.log(uid);
 
@@ -84,7 +85,7 @@ export default function Signup() {
                         profileUrl: url,
                         createdAt: database.getTimeStamp()
                     })
-                    // console.log(uid, name, url);
+                    console.log(uid, name, url);
                 })
                 setLoading(false);
                 navigate('/'); 

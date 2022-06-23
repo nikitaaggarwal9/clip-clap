@@ -5,8 +5,7 @@ import { database } from '../firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandsClapping } from '@fortawesome/free-solid-svg-icons'
 
-
-function Like({ userData, postData }) {
+function Like2({ userData, postData }) {
     const [like, setLike] = useState(true);
     useEffect(() => {
         let check = postData.likes.includes(userData.userId) ? true : false
@@ -31,7 +30,7 @@ function Like({ userData, postData }) {
                 like != null ?
                     <>
                         {
-                            like == true ? <FontAwesomeIcon icon={faHandsClapping} className={'icon-styling like'} onClick={handleLike}/>:<FontAwesomeIcon icon={faHandsClapping} className={'icon-styling unlike'} onClick={handleLike}/>
+                            like == true ? <FontAwesomeIcon icon={faHandsClapping} style={{padding:'.5rem', fontSize:'1.6rem'}} className={'like'} onClick={handleLike}/>:<FontAwesomeIcon icon={faHandsClapping} style={{padding:'.5rem', fontSize:'1.6rem'}} className={'unlike2'} onClick={handleLike}/>
                         }
                     </> :
                     <></>
@@ -40,4 +39,4 @@ function Like({ userData, postData }) {
     )
 }
 
-export default Like
+export default Like2

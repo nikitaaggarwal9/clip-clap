@@ -5,17 +5,11 @@ import Video from './Video'
 import './Posts.css'
 import Avatar from '@mui/material/Avatar';
 import Like from './Like'
+import Like2 from './Like2'
+import AddComment from './AddComment'
+import Comments from './Comments'
 import CommentIcon from '@material-ui/icons/Comment';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
 
 
 function Posts({ userData }) {
@@ -64,7 +58,7 @@ function Posts({ userData }) {
                                         <Like userData={userData} postData={post}></Like>
                                         <CommentIcon className='comment-icon' onClick={() => handleClickOpen(post.pId)}></CommentIcon>
                                         <Dialog
-                                            open={open == post.pId}
+                                            open={open === post.pId}
                                             onClose={handleClose}
                                             aria-labelledby="alert-dialog-title"
                                             aria-describedby="alert-dialog-description"
@@ -73,43 +67,26 @@ function Posts({ userData }) {
                                         >
                                             <div className="modal-container">
                                                 <div className="video-modal">
-                                                    {/* <Video src={post.pUrl} className="modal-video"/> */}
                                                     <video src={post.pUrl} muted='muted' autoPlay={true} controls ></video>
                                                 </div>
-                                                <div className="comment-modal">
-                                                    <Card sx={{ maxWidth: 345 }}>
-                                                        <CardActionArea>
-                                                            <CardMedia
-                                                                component="img"
-                                                                height="140"
-                                                                image="/static/images/cards/contemplative-reptile.jpg"
-                                                                alt="green iguana"
-                                                            />
-                                                            <CardContent>
-                                                                <Typography gutterBottom variant="h5" component="div">
-                                                                    Lizard
-                                                                </Typography>
-                                                                <Typography variant="body2" color="text.secondary">
-                                                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                                                    species, ranging across all continents except Antarctica
-                                                                </Typography>
-                                                            </CardContent>
-                                                        </CardActionArea>
-                                                        <CardActions>
-                                                            <Button size="small" color="primary">
-                                                                Share
-                                                            </Button>
-                                                        </CardActions>
-                                                    </Card>
 
-                                                    <Card variant='outlined'>
-                                                        <Typography variant="body2" color="text.secondary">
-                                                            {post.likes.length == 0 ? '' : `Liked By ${post.liked.length} users`}
-                                                        </Typography>
-                                                        <div>
-                                                            like2
+                                                <div className="comment-modal">
+                                                    <div className='card1' >
+                                                        <Comments postData={post}></Comments>
+                                                    </div>
+
+                                                    <div className='card2' > 
+                                                    {/* variant='outlined' style={{ maxWidth: 345, height: 99.68 }}> */}
+                                                        <div style={{ display: 'flex' }}>
+                                                            <Like2 postData={post} userData={userData} style={{ display: 'flex', justifyContent: 'center' }}></Like2>
+                                                            <div variant='body1' style={{ width: 290, paddingTop: '.5rem' }}>
+                                                                {post.likes.length === 0 ? '' : `Appreciated By ${post.likes.length} user(s)`}
+                                                            </div>
                                                         </div>
-                                                    </Card>
+                                                        <div style={{ display: 'flex' }}>
+                                                            <AddComment userData={userData} postData={post}></AddComment>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </Dialog>
