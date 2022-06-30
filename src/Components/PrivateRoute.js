@@ -6,7 +6,7 @@ import Feed from './Feed';
 
 function PrivateRoute({children}) {
     const { user } = useContext(AuthContext)
-    console.log(user)
+    // console.log(user)
     return  user!==null ? children: <Navigate to="/login" />
 }
 

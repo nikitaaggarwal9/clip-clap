@@ -96,7 +96,7 @@ export default function Signup() {
                     <CardContent>
                         {error !== '' && <Alert severity="error">{error}</Alert>}
                         <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth={true} margin='dense' size='small' value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth={true} margin='dense' size='small' value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <TextField type="password" id="outlined-basic" label="Password" variant="outlined" fullWidth={true} margin='dense' size='small' value={password} onChange={(e) => setPassword(e.target.value)} />
                         <Typography className={classes.text2} color='primary' variant="subtitle1">
                             Forgot Password?
                         </Typography>

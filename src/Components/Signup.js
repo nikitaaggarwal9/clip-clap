@@ -4,7 +4,7 @@ import { AuthContext } from '../Context/AuthContext';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Button, CardActions } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import './Signup.css'
 import Alert from '@mui/material/Alert';
@@ -50,11 +50,11 @@ export default function Signup() {
         try {
             setError('')
             setLoading(true)
-            console.log(email, password)
+            // console.log(email, password)
             let userObj = await signup(email, password);
-            console.log(userObj)
+            // console.log(userObj)
             let uid = userObj.user.uid
-            console.log(uid);
+            // console.log(uid);
 
             const uploadTask = storage.ref(`/users/${uid}/ProfileImage`).put(file);
 
@@ -63,7 +63,7 @@ export default function Signup() {
 
             function fn1(snapshot) {
                 let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                console.log(`Upload is ${progress} done.`, snapshot.bytesTransferred, snapshot.totalBytes)
+                // console.log(`Upload is ${progress} done.`, snapshot.bytesTransferred, snapshot.totalBytes)
             }
 
             function fn2(error) {
@@ -77,7 +77,7 @@ export default function Signup() {
 
             function fn3() {
                 uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-                    console.log(url);
+                    // console.log(url);
                     database.users.doc(uid).set({
                         email: email,
                         userId: uid,
@@ -85,13 +85,14 @@ export default function Signup() {
                         profileUrl: url,
                         createdAt: database.getTimeStamp()
                     })
-                    console.log(uid, name, url);
+                    // console.log(uid, name, url);
                 })
                 setLoading(false);
                 navigate('/'); 
             }
 
         } catch (err) {
+            console.log(err.message);
             setError(err);
             setTimeout(() => {
                 setError('')
@@ -112,7 +113,7 @@ export default function Signup() {
                         </Typography>
                         {error !== '' && <Alert severity="error">{error}</Alert>}
                         <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth={true} margin='dense' size='small' value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth={true} margin='dense' size='small' value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <TextField type="password" id="outlined-basic" label="Password" variant="outlined" fullWidth={true} margin='dense' size='small' value={password} onChange={(e) => setPassword(e.target.value)} />
                         <TextField id="outlined-basic" label="Full Name" variant="outlined" fullWidth={true} margin='dense' size='small' value={name} onChange={(e) => setName(e.target.value)} />
                         <Button size="small" color="secondary" fullWidth={true} variant='outlined' margin='dense' startIcon={<CloudUploadIcon />} component='label'>
                             Upload Profile Image

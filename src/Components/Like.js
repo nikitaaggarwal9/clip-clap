@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
-// import ClapButton from 'react-clap-button';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import { database } from '../firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandsClapping } from '@fortawesome/free-solid-svg-icons'
 
 
-function Like({ userData, postData }) {
+function Like({ userData, postData, likes, setLikes }) {
     const [like, setLike] = useState(true);
     useEffect(() => {
         let check = postData.likes.includes(userData.userId) ? true : false
         setLike(check)
+        setLikes(postData.likes.length)
     }, [postData])
     const handleLike = () => {
         if(like==true) {

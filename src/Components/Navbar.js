@@ -21,13 +21,14 @@ import { faCompass } from '@fortawesome/free-solid-svg-icons'
 import Avatar from '@mui/material/Avatar';
 
 
-const useStyles = makeStyles({
-    appb: {
-        background: 'purple'
-    }
-})
+// const useStyles = makeStyles({
+//     appb: {
+//         background: 'purple'
+//     }
+// })
 
 export default function Navbar({ userData }) {
+    // console.log(userData);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
         React.useState(null);
@@ -36,7 +37,7 @@ export default function Navbar({ userData }) {
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const navigate = useNavigate();
     const { logout } = React.useContext(AuthContext);
-    const classes = useStyles()
+    // const classes = useStyles()
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -56,7 +57,7 @@ export default function Navbar({ userData }) {
     };
 
     const handleProfile = () => {
-        navigate(`/profile/${userData.uid}`)
+        navigate(`/profile/${userData?.userId}`)
     };
 
     const handleBannerClick = () => {
@@ -120,7 +121,8 @@ export default function Navbar({ userData }) {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="fixed" className={classes.appb} sx={{}}>
+            <AppBar position="fixed"  sx={{backgroundColor: 'purple'}}>
+            {/* className={classes.appb} */}  
                 <Toolbar>
                     <Typography
                         variant="h6"
@@ -146,7 +148,7 @@ export default function Navbar({ userData }) {
                             onClick={handleProfileMenuOpen}
                             color="inherit"
                         >
-                            <Avatar src={userData.profileUrl} />
+                            <Avatar src={userData?.profileUrl} />
                         </IconButton>
                     </Box>
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
